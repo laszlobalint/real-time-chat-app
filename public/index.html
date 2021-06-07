@@ -4,21 +4,30 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/styles.min.css" />
     <title>Index</title>
   </head>
   <body>
-    <h2>Chat App</h2>
-    <div id="messages"></div>
-    <div>
-      <form method="post" id="message-form">
-        <input type="text" name="message" id="message" placeholder="Write a message..." />
-        <input type="submit" value="Send" />
-      </form>
-      <button type="button" id="send-location">Send Location</button>
+    <div class="chat">
+      <div class="chat__sidebar"></div>
+      <div class="chat__main">
+        <h2>Chat App</h2>
+        <div id="messages" class="chat__messages"></div>
+        <div class="compose">
+          <form method="post" id="message-form">
+            <input type="text" name="message" id="message" placeholder="Write a message..." />
+            <button type="submit">Send</button>
+          </form>
+          <button type="button" id="send-location">Send Location</button>
+        </div>
+      </div>
     </div>
+
     <script id="message-template" type="text/html">
-      <div>
-        <p>{{ createdAt }} - {{message}}</p>
+      <div class="message">
+        <p><span class="message__name">Some Username</span><span class="message__meta">{{ createdAt }}</span></p>
+        <p>{{message}}</p>
       </div>
     </script>
     <script id="url-template" type="text/html">
