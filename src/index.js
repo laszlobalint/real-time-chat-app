@@ -14,8 +14,6 @@ const io = socketio(server);
 app.use(express.static(path.join(__dirname, '../public')));
 
 io.on('connection', (socket) => {
-  console.log('New websocket connection...');
-
   socket.emit('message', generateMessage('Welcome!'));
   socket.broadcast.emit('message', generateMessage('A new user has joined...'));
 
