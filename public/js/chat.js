@@ -11,12 +11,20 @@ const urlTemplate = document.querySelector('#url-template').innerHTML;
 const { name, room } = Qs.parse(location.search, { ignoreQueryPrefix: true });
 
 socket.on('message', (message) => {
-  const html = Mustache.render(messageTemplate, { message: message.text, createdAt: moment(message.createdAt).format('kk:mm.ss') });
+  const html = Mustache.render(messageTemplate, {
+    name: message.name,
+    message: message.text,
+    createdAt: moment(message.createdAt).format('kk:mm.ss'),
+  });
   $messages.insertAdjacentHTML('beforeend', html);
 });
 
 socket.on('locationMessage', (message) => {
-  const html = Mustache.render(urlTemplate, { url: message.url, createdAt: moment(message.createdAt).format('kk:mm.ss') });
+  const html = Mustache.render(urlTemplate, {
+    name: message.name,
+    url: message.url,
+    createdAt: moment(message.createdAt).format('kk:mm.ss'),
+  });
   $messages.insertAdjacentHTML('beforeend', html);
 });
 
@@ -52,4 +60,9 @@ $button.addEventListener('click', () => {
   );
 });
 
-socket.emit('join', { name, room });
+socket.emit('join', { name, room }, (error) => {
+  if (error) {
+    alert(error);
+    location.href = '/';
+  }
+});

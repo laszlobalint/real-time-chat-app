@@ -16,7 +16,7 @@
         <div id="messages" class="chat__messages"></div>
         <div class="compose">
           <form method="post" id="message-form">
-            <input type="text" name="message" id="message" placeholder="Write a message..." />
+            <input type="text" name="message" id="message" placeholder="Write a message..." autocomplete="off" required />
             <button type="submit">Send</button>
           </form>
           <button type="button" id="send-location">Send Location</button>
@@ -25,13 +25,14 @@
     </div>
     <script id="message-template" type="text/html">
       <div class="message">
-        <p><span class="message__name">Some Username</span><span class="message__meta">{{ createdAt }}</span></p>
+        <p><span class="message__name">{{name}}</span><span class="message__meta">{{ createdAt }}</span></p>
         <p>{{message}}</p>
       </div>
     </script>
     <script id="url-template" type="text/html">
       <div>
-        <p><a href="{{url}}" target="_blank">{{ createdAt }} - Map Link</a></p>
+        <p><span class="message__name">{{name}}</span><span class="message__meta">{{ createdAt }}</span></p>
+        <p><a class="message__name" href="{{url}}" target="_blank">Map Location of {{name}}</a></p>
       </div>
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
